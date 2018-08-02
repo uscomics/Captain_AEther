@@ -1,0 +1,288 @@
+fileFormatVersion: 2
+guid: a3a21402ef84046f7944f52fbc10c7dd
+timeCreated: 1431671424
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: ball_2
+    100002: ball_3
+    100004: ball_5
+    100006: ball_6
+    100008: Base
+    100010: BHatch
+    100012: Body
+    100014: BuckPiston1
+    100016: BuckPiston2
+    100018: //RootNode
+    100020: cyl_2
+    100022: cyl_3
+    100024: DTurret
+    100026: EngineR
+    100028: Hatch1
+    100030: Hatch2
+    100032: JetVane1
+    100034: JetVane2
+    100036: JetVane3
+    100038: JetVane4
+    100040: JetVane5
+    100042: JetVane6
+    100044: JetVaneRotate2
+    100046: JetVanesRotate1
+    100048: LBlind1
+    100050: LBlind2
+    100052: LBlind3
+    100054: LBlind4
+    100056: LCannonF
+    100058: LCannonFBarrel
+    100060: LFlaps1
+    100062: LFlaps1P1
+    100064: LFlaps1P2
+    100066: LFlaps2
+    100068: LFlaps2P1
+    100070: LFlaps2P2
+    100072: LFlaps3
+    100074: LFlaps3P1
+    100076: LFlaps3P2
+    100078: LHatch1
+    100080: LHatch2
+    100082: LLeafCover1
+    100084: LLeafCover2
+    100086: LLeafCoverN
+    100088: LLeafCoverT1
+    100090: LLeafCoverT2
+    100092: LLeafCoverV
+    100094: LPawBasis
+    100096: LPawBody
+    100098: LPawPiston
+    100100: LPawPiston1
+    100102: LPawPiston2
+    100104: LRearFlap
+    100106: LTurret
+    100108: LTurretBarrel
+    100110: Nozzles1
+    100112: Projector
+    100114: RBlind1
+    100116: RBlind2
+    100118: RBlind3
+    100120: RBlind4
+    100122: RCannonF
+    100124: RCannonFBarrel
+    100126: RFlaps1
+    100128: RFlaps1P1
+    100130: RFlaps1P2
+    100132: RFlaps2
+    100134: RFlaps2P1
+    100136: RFlaps2P2
+    100138: RFlaps3
+    100140: RFlaps3P1
+    100142: RFlaps3P2
+    100144: RHatch1
+    100146: RHatch2
+    100148: RLeafCover1
+    100150: RLeafCover2
+    100152: RLeafCoverN
+    100154: RLeafCoverT1
+    100156: RLeafCoverT2
+    100158: RLeafCoverV
+    100160: RPawBasis
+    100162: RPawBody
+    100164: RPawPiston
+    100166: RPawPiston1
+    100168: RPawPiston2
+    100170: RRearFlap
+    100172: RTurret
+    100174: RTurretBarrel
+    100176: Spaceship
+    100178: SupportTPaw
+    100180: TCannon
+    100182: TCannonBarrel
+    100184: TE_CenterLens_1a
+    100186: TPaw
+    100188: "\xC6ther Pod Port"
+    100190: "\xC6ther Pod Starboard"
+    400000: ball_2
+    400002: ball_3
+    400004: ball_5
+    400006: ball_6
+    400008: Base
+    400010: BHatch
+    400012: Body
+    400014: BuckPiston1
+    400016: BuckPiston2
+    400018: //RootNode
+    400020: cyl_2
+    400022: cyl_3
+    400024: DTurret
+    400026: EngineR
+    400028: Hatch1
+    400030: Hatch2
+    400032: JetVane1
+    400034: JetVane2
+    400036: JetVane3
+    400038: JetVane4
+    400040: JetVane5
+    400042: JetVane6
+    400044: JetVaneRotate2
+    400046: JetVanesRotate1
+    400048: LBlind1
+    400050: LBlind2
+    400052: LBlind3
+    400054: LBlind4
+    400056: LCannonF
+    400058: LCannonFBarrel
+    400060: LFlaps1
+    400062: LFlaps1P1
+    400064: LFlaps1P2
+    400066: LFlaps2
+    400068: LFlaps2P1
+    400070: LFlaps2P2
+    400072: LFlaps3
+    400074: LFlaps3P1
+    400076: LFlaps3P2
+    400078: LHatch1
+    400080: LHatch2
+    400082: LLeafCover1
+    400084: LLeafCover2
+    400086: LLeafCoverN
+    400088: LLeafCoverT1
+    400090: LLeafCoverT2
+    400092: LLeafCoverV
+    400094: LPawBasis
+    400096: LPawBody
+    400098: LPawPiston
+    400100: LPawPiston1
+    400102: LPawPiston2
+    400104: LRearFlap
+    400106: LTurret
+    400108: LTurretBarrel
+    400110: Nozzles1
+    400112: Projector
+    400114: RBlind1
+    400116: RBlind2
+    400118: RBlind3
+    400120: RBlind4
+    400122: RCannonF
+    400124: RCannonFBarrel
+    400126: RFlaps1
+    400128: RFlaps1P1
+    400130: RFlaps1P2
+    400132: RFlaps2
+    400134: RFlaps2P1
+    400136: RFlaps2P2
+    400138: RFlaps3
+    400140: RFlaps3P1
+    400142: RFlaps3P2
+    400144: RHatch1
+    400146: RHatch2
+    400148: RLeafCover1
+    400150: RLeafCover2
+    400152: RLeafCoverN
+    400154: RLeafCoverT1
+    400156: RLeafCoverT2
+    400158: RLeafCoverV
+    400160: RPawBasis
+    400162: RPawBody
+    400164: RPawPiston
+    400166: RPawPiston1
+    400168: RPawPiston2
+    400170: RRearFlap
+    400172: RTurret
+    400174: RTurretBarrel
+    400176: Spaceship
+    400178: SupportTPaw
+    400180: TCannon
+    400182: TCannonBarrel
+    400184: TE_CenterLens_1a
+    400186: TPaw
+    400188: "\xC6ther Pod Port"
+    400190: "\xC6ther Pod Starboard"
+    2300000: ball_2
+    2300002: ball_3
+    2300004: ball_5
+    2300006: ball_6
+    2300008: cyl_2
+    2300010: cyl_3
+    2300012: TE_CenterLens_1a
+    2300014: "\xC6ther Pod Port"
+    2300016: "\xC6ther Pod Starboard"
+    3300000: ball_2
+    3300002: ball_3
+    3300004: ball_5
+    3300006: ball_6
+    3300008: cyl_2
+    3300010: cyl_3
+    3300012: TE_CenterLens_1a
+    3300014: "\xC6ther Pod Port"
+    3300016: "\xC6ther Pod Starboard"
+    4300000: Spaceship
+    4300002: ball_6
+    4300004: cyl_3
+    4300006: ball_5
+    4300008: ball_2
+    4300010: cyl_2
+    4300012: ball_3
+    4300014: "\xC6ther Pod Port"
+    4300016: "\xC6ther Pod Starboard"
+    4300018: TE_CenterLens_1a
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Spaceship
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
