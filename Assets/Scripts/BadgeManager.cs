@@ -23,10 +23,10 @@ public class Badges
     public static string BADGE_SCORE_MAJOR_PLAYER = "MAJOR_PLAYER";
     public static string BADGE_SCORE_CHAMP = "CHAMP";
     public static string BADGE_COIN_BENJAMINS = "BENJAMINS";
-    public static string BADGE_COIN_CASH_ON_HAND = "CASH_ON_HAND";
+    public static string BADGE_COIN_CASH_COW = "CASH_COW";
     public static string BADGE_COIN_LOOT = "LOOT";
     public static string BADGE_COIN_WAD = "WAD";
-    public static string BADGE_COIN_DOUGH = "DOUGH";
+    public static string BADGE_COIN_BIG_BANK_HANK = "BIG_BANK_HANK";
     public static string BADGE_COIN_RICH = "RICH";
     public static string BADGE_COIN_MILLIONAIRE = "MILLIONAIRE";
     public static string BADGE_CONSECUTIVE_DAYS_TOURIST = "TOURIST";
@@ -54,21 +54,21 @@ public class Badge
     public string id;
     public string name;
     public string description;
-    public string imageURL;
+    public Image icon;
 
-    public Badge(string inId, string inName, string inDescription, string inImageURL)
+    public Badge(string inId, string inName, string inDescription, Image inIcon)
     {
         id = inId;
         name = inName;
         description = inDescription;
-        imageURL = inImageURL;
+        icon = inIcon;
     }
 }
 
 [System.Serializable]
 public class BadgeList<T> where T : Badge
 {
-    private List<T> badges;
+    public List<T> badges;
 
     public BadgeList()
     {
@@ -110,29 +110,38 @@ public class CustomerBadge : Badge
     public System.DateTime earned;
 
     public CustomerBadge(Badge inBadge)
-         : base(inBadge.id, inBadge.name, inBadge.description, inBadge.imageURL)
+         : base(inBadge.id, inBadge.name, inBadge.description, inBadge.icon)
     {
         earned = System.DateTime.Now;
     }
 
-    public CustomerBadge(string inId, string inName, string inDescription, string inImageURL)
-         : base(inId, inName, inDescription, inImageURL)
+    public CustomerBadge(string inId, string inName, string inDescription, Image inIcon)
+         : base(inId, inName, inDescription, inIcon)
     {
         earned = System.DateTime.Now;
     }
 
-    public CustomerBadge(string inId, string inName, string inDescription, string inImageURL, System.DateTime inEarned)
-         : base(inId, inName, inDescription, inImageURL)
+    public CustomerBadge(string inId, string inName, string inDescription, Image inIcon, System.DateTime inEarned)
+         : base(inId, inName, inDescription, inIcon)
     {
         earned = inEarned;
     }
 }
+
+[System.Serializable]
+public class BadgeNameAndIcon
+{
+    public string name;
+    public Image icon;
+};
+
 
 public class BadgeManager : MonoBehaviour
 {
     public MessageManager messageManager;
     public Customer customer;
     public Stats stats;
+    public BadgeNameAndIcon[] badgeNamesAndIcons;
 
     private BadgeList<Badge> badges;
 
@@ -153,42 +162,58 @@ public class BadgeManager : MonoBehaviour
         UpdateCustomerBadges(customer, inStats);
     }
 
+    public Image GetBadgeIcon(string inBadgeName)
+    {
+        //string resourceName = "Textures/Badges/" + inBadgeName + " Badge";
+        //Texture icon = Resources.Load(resourceName, typeof(Texture2D)) as Texture;
+        //return icon;
+
+        for (int loop = 0; loop < badgeNamesAndIcons.Length; loop++)
+        {
+            BadgeNameAndIcon badgeInfo = badgeNamesAndIcons[loop];
+            if (badgeInfo.name != inBadgeName) continue;
+            Image icon = Instantiate(badgeInfo.icon, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as Image;
+            return icon;
+        }
+        return null;
+    }
+
     private void LoadBadges()
     {
         badges = new BadgeList<Badge>();
-        badges.Add(new Badge(Badges.BADGE_SCORE_PARTICIPANT, "Participant", "You've scored 1000 points defeating enemies.", ""));
-        badges.Add(new Badge(Badges.BADGE_SCORE_ROOKIE, "Rookie", "You've scored 10,000 points defeating enemies.", ""));
-        badges.Add(new Badge(Badges.BADGE_SCORE_COMPETITOR, "Competitor", "You've scored 50,000 points defeating enemies.", ""));
-        badges.Add(new Badge(Badges.BADGE_SCORE_PLAYER, "Player", "You've scored 100,000 points defeating enemies.", ""));
-        badges.Add(new Badge(Badges.BADGE_SCORE_MAJOR_PLAYER, "Major Player", "You've scored 500,000 points defeating enemies.", ""));
-        badges.Add(new Badge(Badges.BADGE_SCORE_CHAMP, "Champ", "You've scored 1,000,000 points defeating enemies.", ""));
-        badges.Add(new Badge(Badges.BADGE_COIN_BENJAMINS, "Benjamins", "You've earned 100 in-store credits.", ""));
-        badges.Add(new Badge(Badges.BADGE_COIN_CASH_ON_HAND, "Cash On Hand", "You've earned 1,000 in-store credits.", ""));
-        badges.Add(new Badge(Badges.BADGE_COIN_LOOT, "Loot", "You've earned 5,000 in-store credits.", ""));
-        badges.Add(new Badge(Badges.BADGE_COIN_WAD, "Wad", "You've earned 10,000 in-store credits.", ""));
-        badges.Add(new Badge(Badges.BADGE_COIN_DOUGH, "Wad", "You've earned 50,000 in-store credits.", ""));
-        badges.Add(new Badge(Badges.BADGE_COIN_RICH, "Wad", "You've earned 100,000 in-store credits.", ""));
-        badges.Add(new Badge(Badges.BADGE_COIN_MILLIONAIRE, "Wad", "You've earned 1,000,000 in-store credits.", ""));
-        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_TOURIST, "Tourist", "You've played for 2 consecutive days.", ""));
-        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_VISITOR, "Visitor", "You've played for 7 consecutive days.", ""));
-        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_DAY_TRIPPER, "Day Tripper", "You've played for 14 consecutive days.", ""));
-        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_HARD_CORE, "Hard Core", "You've played for 30 consecutive days.", ""));
-        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_ADDICTED, "Addicted", "You've played for 60 consecutive days.", ""));
-        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_FANATIC, "Fanatic", "You've played for 90 consecutive days.", ""));
-        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_DEVOTEE, "Devotee", "You've played for 120 consecutive days.", ""));
-        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_ZEALOT, "Zealot", "You've played for 150 consecutive days.", ""));
-        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_GET_A_LIFE, "Get A Life", "You've played for 365 consecutive days.", ""));
-        badges.Add(new Badge(Badges.BADGE_DEFEATED_SUPERBRAIN_VICTOR, "Victor", "You've defeated Superbrain", ""));
-        badges.Add(new Badge(Badges.BADGE_DEFEATED_SUPERBRAIN_HERO, "Victor", "You've defeated Superbrain 10 times", ""));
-        badges.Add(new Badge(Badges.BADGE_DEFEATED_SUPERBRAIN_SUPER_HERO, "Victor", "You've defeated Superbrain 50 times", ""));
-        badges.Add(new Badge(Badges.BADGE_DEFEATED_SUPERBRAIN_BRAIN_BLASTER, "Victor", "You've defeated Superbrain 100 times", ""));
-        badges.Add(new Badge(Badges.BADGE_DEFEATED_BY_SUPERBRAIN_DEFEATED, "Defeated", "You were defeated by Superbrain", ""));
-        badges.Add(new Badge(Badges.BADGE_DEFEATED_BY_SUPERBRAIN_LOSER, "Loser", "You were defeated by Superbrain 10 times", ""));
-        badges.Add(new Badge(Badges.BADGE_DEFEATED_BY_SUPERBRAIN_BROWBEATEN, "Browbeaten", "You were defeated by Superbrain 50 times", ""));
-        badges.Add(new Badge(Badges.BADGE_DEFEATED_BY_SUPERBRAIN_BRAIN_BLASTED, "Brain Blasted", "You were defeated by Superbrain 100 times", ""));
-}
+        badges.Add(new Badge(Badges.BADGE_SCORE_PARTICIPANT, "Participant", "You've scored 1000 points defeating enemies.", GetBadgeIcon("Participant")));
+        badges.Add(new Badge(Badges.BADGE_SCORE_ROOKIE, "Rookie", "You've scored 10,000 points defeating enemies.", GetBadgeIcon("Rookie")));
+        badges.Add(new Badge(Badges.BADGE_SCORE_COMPETITOR, "Competitor", "You've scored 50,000 points defeating enemies.", GetBadgeIcon("Competitor")));
+        badges.Add(new Badge(Badges.BADGE_SCORE_PLAYER, "Player", "You've scored 100,000 points defeating enemies.", GetBadgeIcon("Player")));
+        badges.Add(new Badge(Badges.BADGE_SCORE_MAJOR_PLAYER, "Major Player", "You've scored 500,000 points defeating enemies.", GetBadgeIcon("Major Player")));
+        badges.Add(new Badge(Badges.BADGE_SCORE_CHAMP, "Champ", "You've scored 1,000,000 points defeating enemies.", GetBadgeIcon("Champ")));
+        badges.Add(new Badge(Badges.BADGE_COIN_BENJAMINS, "Benjamins", "You've earned 100 in-store credits.", GetBadgeIcon("Benjamins")));
+        badges.Add(new Badge(Badges.BADGE_COIN_CASH_COW, "Cash Cow", "You've earned 1,000 in-store credits.", GetBadgeIcon("Cash Cow")));
+        badges.Add(new Badge(Badges.BADGE_COIN_LOOT, "Loot", "You've earned 5,000 in-store credits.", GetBadgeIcon("Loot")));
+        badges.Add(new Badge(Badges.BADGE_COIN_WAD, "Wad", "You've earned 10,000 in-store credits.", GetBadgeIcon("Wad")));
+        badges.Add(new Badge(Badges.BADGE_COIN_BIG_BANK_HANK, "Big Bank Hank", "You've earned 50,000 in-store credits.", GetBadgeIcon("Big Bank Hank")));
+        badges.Add(new Badge(Badges.BADGE_COIN_RICH, "Rich", "You've earned 100,000 in-store credits.", GetBadgeIcon("Rich")));
+        badges.Add(new Badge(Badges.BADGE_COIN_MILLIONAIRE, "Millionaire", "You've earned 1,000,000 in-store credits.", GetBadgeIcon("Millionaire")));
+        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_TOURIST, "Tourist", "You've played for 2 consecutive days.", GetBadgeIcon("Tourist")));
+        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_VISITOR, "Visitor", "You've played for 7 consecutive days.", GetBadgeIcon("Visitor")));
+        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_DAY_TRIPPER, "Day Tripper", "You've played for 14 consecutive days.", GetBadgeIcon("Day Tripper")));
+        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_HARD_CORE, "Hard Core", "You've played for 30 consecutive days.", GetBadgeIcon("Hard Core")));
+        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_ADDICTED, "Addicted", "You've played for 60 consecutive days.", GetBadgeIcon("Addicted")));
+        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_FANATIC, "Fanatic", "You've played for 90 consecutive days.", GetBadgeIcon("Fanatic")));
+        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_DEVOTEE, "Devotee", "You've played for 120 consecutive days.", GetBadgeIcon("Devotee")));
+        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_ZEALOT, "Zealot", "You've played for 150 consecutive days.", GetBadgeIcon("Zealot")));
+        badges.Add(new Badge(Badges.BADGE_CONSECUTIVE_DAYS_GET_A_LIFE, "Get A Life", "You've played for 365 consecutive days.", GetBadgeIcon("Get A Life")));
+        badges.Add(new Badge(Badges.BADGE_DEFEATED_SUPERBRAIN_VICTOR, "Victor", "You've defeated Superbrain", GetBadgeIcon("Victor")));
+        badges.Add(new Badge(Badges.BADGE_DEFEATED_SUPERBRAIN_HERO, "Hero", "You've defeated Superbrain 10 times", GetBadgeIcon("Hero")));
+        badges.Add(new Badge(Badges.BADGE_DEFEATED_SUPERBRAIN_SUPER_HERO, "Super Hero", "You've defeated Superbrain 50 times", GetBadgeIcon("Super Hero")));
+        badges.Add(new Badge(Badges.BADGE_DEFEATED_SUPERBRAIN_BRAIN_BLASTER, "Brain Blaster", "You've defeated Superbrain 100 times", GetBadgeIcon("Brain Blaster")));
+        badges.Add(new Badge(Badges.BADGE_DEFEATED_BY_SUPERBRAIN_DEFEATED, "Defeated", "You were defeated by Superbrain", GetBadgeIcon("Defeated")));
+        badges.Add(new Badge(Badges.BADGE_DEFEATED_BY_SUPERBRAIN_LOSER, "Loser", "You were defeated by Superbrain 10 times", GetBadgeIcon("Loser")));
+        badges.Add(new Badge(Badges.BADGE_DEFEATED_BY_SUPERBRAIN_BROWBEATEN, "Browbeaten", "You were defeated by Superbrain 50 times", GetBadgeIcon("Browbeaten")));
+        badges.Add(new Badge(Badges.BADGE_DEFEATED_BY_SUPERBRAIN_BRAIN_BLASTED, "Brain Blasted", "You were defeated by Superbrain 100 times", GetBadgeIcon("Brain Blasted")));
+    }
 
-private void AddBadge(Customer customer, string badgeID, string messageId)
+    private void AddBadge(Customer customer, string badgeID, string messageId)
     {
         customer.badges.Add(new CustomerBadge(badges.GetBadge(badgeID)));
         if (null == messageManager) return;
@@ -219,10 +244,10 @@ private void AddBadge(Customer customer, string badgeID, string messageId)
     {
         // 100, 1000, 5000, 10,000, 50,000, 100,000, 1,000,000
         if ((100 <= stats.coin) && (null == customer.badges.GetBadge(Badges.BADGE_COIN_BENJAMINS))) AddBadge(customer, Badges.BADGE_COIN_BENJAMINS, Messages.MSG_BADGE_COIN_BENJAMINS);
-        else if ((1000 <= stats.coin) && (null == customer.badges.GetBadge(Badges.BADGE_COIN_CASH_ON_HAND))) AddBadge(customer, Badges.BADGE_COIN_CASH_ON_HAND, Messages.MSG_BADGE_COIN_CASH_ON_HAND);
+        else if ((1000 <= stats.coin) && (null == customer.badges.GetBadge(Badges.BADGE_COIN_CASH_COW))) AddBadge(customer, Badges.BADGE_COIN_CASH_COW, Messages.MSG_BADGE_COIN_CASH_COW);
         else if ((10000 <= stats.coin) && (null == customer.badges.GetBadge(Badges.BADGE_COIN_LOOT))) AddBadge(customer, Badges.BADGE_COIN_LOOT, Messages.MSG_BADGE_COIN_LOOT);
         else if ((50000 <= stats.coin) && (null == customer.badges.GetBadge(Badges.BADGE_COIN_WAD))) AddBadge(customer, Badges.BADGE_COIN_WAD, Messages.MSG_BADGE_COIN_WAD);
-        else if ((100000 <= stats.coin) && (null == customer.badges.GetBadge(Badges.BADGE_COIN_DOUGH))) AddBadge(customer, Badges.BADGE_COIN_DOUGH, Messages.MSG_BADGE_COIN_DOUGH);
+        else if ((100000 <= stats.coin) && (null == customer.badges.GetBadge(Badges.BADGE_COIN_BIG_BANK_HANK))) AddBadge(customer, Badges.BADGE_COIN_BIG_BANK_HANK, Messages.MSG_BADGE_COIN_BIG_BANK_HANK);
         else if ((500000 <= stats.coin) && (null == customer.badges.GetBadge(Badges.BADGE_COIN_RICH))) AddBadge(customer, Badges.BADGE_COIN_RICH, Messages.MSG_BADGE_COIN_RICH);
         else if ((1000000 <= stats.coin) && (null == customer.badges.GetBadge(Badges.BADGE_COIN_MILLIONAIRE))) AddBadge(customer, Badges.BADGE_COIN_MILLIONAIRE, Messages.MSG_BADGE_COIN_MILLIONAIRE);
     }

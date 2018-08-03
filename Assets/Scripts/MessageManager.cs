@@ -17,10 +17,10 @@ public class Messages : MonoBehaviour
     public static string MSG_BADGE_SCORE_MAJOR_PLAYER = "You got the Major Player badge!";
     public static string MSG_BADGE_SCORE_CHAMP = "You got the Champ badge!";
     public static string MSG_BADGE_COIN_BENJAMINS = "You got the Benjamins badge!";
-    public static string MSG_BADGE_COIN_CASH_ON_HAND = "You got the Cash On Hand badge!";
+    public static string MSG_BADGE_COIN_CASH_COW = "You got the Cash Cow badge!";
     public static string MSG_BADGE_COIN_LOOT = "You got the Loot badge!";
     public static string MSG_BADGE_COIN_WAD = "You got the Wad badge!";
-    public static string MSG_BADGE_COIN_DOUGH = "You got the Wad badge!";
+    public static string MSG_BADGE_COIN_BIG_BANK_HANK = "You got the Big Bank Hank badge!";
     public static string MSG_BADGE_COIN_RICH = "You got the Rich badge!";
     public static string MSG_BADGE_COIN_MILLIONAIRE = "You got the Millionaire badge!";
     public static string MSG_BADGE_CONSECUTIVE_DAYS_TOURIST = "You got the Tourist badge!";
