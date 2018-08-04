@@ -164,10 +164,6 @@ public class BadgeManager : MonoBehaviour
 
     public Image GetBadgeIcon(string inBadgeName)
     {
-        //string resourceName = "Textures/Badges/" + inBadgeName + " Badge";
-        //Texture icon = Resources.Load(resourceName, typeof(Texture2D)) as Texture;
-        //return icon;
-
         for (int loop = 0; loop < badgeNamesAndIcons.Length; loop++)
         {
             BadgeNameAndIcon badgeInfo = badgeNamesAndIcons[loop];

@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 	public Transform shotSpawn;
 	public float fireRate = 0.5F;
 
-	private float nextFire = 0.0F;
+    private float nextFire = 0.0F;
 
     void Start()
 	{
@@ -32,19 +32,16 @@ public class PlayerController : MonoBehaviour
 	{
 		float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis("Vertical");
-        Debug.Log("PlayerController::FixedUpdate: h = " + h);
-        Debug.Log("PlayerController::FixedUpdate: v = " + v);
-
         Rigidbody r = GetComponent<Rigidbody>();
 
         if ((0 == h) && (0 == v))
         {
             h = Input.GetAxis("MovementX");
             v = Input.GetAxis("MovementY");
-            if (1 < h) h = 1f;
-            else if (-1 > h) h = -1f;
-            if (1 < v) v = 1f;
-            else if (-1 > v) v = -1f;
+            if (GameSettings.horizonalMouseSensitivity < h) h = GameSettings.horizonalMouseSensitivity;
+            else if (-GameSettings.horizonalMouseSensitivity > h) h = -GameSettings.horizonalMouseSensitivity;
+            if (GameSettings.verticalMouseSensitivity < v) v = GameSettings.verticalMouseSensitivity;
+            else if (-GameSettings.verticalMouseSensitivity > v) v = -GameSettings.verticalMouseSensitivity;
         } // if
 
         Vector3 m = new Vector3(h, 0.0f, v) * speed;

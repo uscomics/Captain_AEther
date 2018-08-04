@@ -34,13 +34,13 @@ public class Stats : MonoBehaviour
 
     public Stats CombineStats(Stats inStats)
     {
-        Stats newStats = new Stats(score + inStats.score, coin + inStats.coin, inStats.lastDayPlayed, consecutiveDaysPlayingCount, killedSuperbrainCount + inStats.killedSuperbrainCount, killedBySuperbrainCount + inStats.killedBySuperbrainCount);
+        Stats newStats = new Stats(score + inStats.score, coin + inStats.coin, System.DateTime.Today, 1, killedSuperbrainCount + inStats.killedSuperbrainCount, killedBySuperbrainCount + inStats.killedBySuperbrainCount);
         System.DateTime yesterday = System.DateTime.Today.AddDays(-1);
-        if ((yesterday.Year == lastDayPlayed.Year)
-        && (yesterday.Month == lastDayPlayed.Month)
-        && (yesterday.Day == lastDayPlayed.Day))
+        if ((yesterday.Year == inStats.lastDayPlayed.Year)
+        && (yesterday.Month == inStats.lastDayPlayed.Month)
+        && (yesterday.Day == inStats.lastDayPlayed.Day))
         {
-            newStats.consecutiveDaysPlayingCount++;
+            newStats.consecutiveDaysPlayingCount = inStats.consecutiveDaysPlayingCount + 1;
         }
         return newStats;
     }

@@ -15,13 +15,15 @@ public enum GameDifficulty
 [System.Serializable]
 public class GameSettings
 {
-    public GameSettings(GameDifficulty inDifficulty, bool inMovePlayerWithMouse)
+    public GameSettings(GameDifficulty inDifficulty, float inHorizonalMouseSensitivity, float inVerticalMouseSensitivity)
     {
         difficulty = inDifficulty;
-        movePlayerWithMouse = inMovePlayerWithMouse;
+        horizonalMouseSensitivity = inHorizonalMouseSensitivity;
+        verticalMouseSensitivity = inVerticalMouseSensitivity;
     }
     public GameDifficulty difficulty = GameDifficulty.Easy;
-    public bool movePlayerWithMouse = true;
+    public static float horizonalMouseSensitivity;
+    public static float verticalMouseSensitivity;
 }; // class
 
 [System.Serializable]
@@ -87,6 +89,7 @@ public class GameController : MonoBehaviour
     public MessageManager messageManager;
     public Stats stats;
     public Stats previousStats;
+    public GameSettings gameSettings;
 
     private bool playerDeath = false;
 	private float startTime;
@@ -94,7 +97,6 @@ public class GameController : MonoBehaviour
 	private float nextLifeXLocation;
 	private GameObject spawnedPlayer;
 	private List<GameObject> dynamicallyAllocaredObjects = new List<GameObject>();
-    private GameSettings gameSettings = new GameSettings(GameDifficulty.Easy, true);
     private BadgeManager badgeManager;
 
     void Start()
@@ -119,6 +121,17 @@ public class GameController : MonoBehaviour
 			nextLifeXLocation = -6.0f;
 			RunLevel();
 		} // if
+
+        
+        Stats combinedStats = stats.CombineStats(previousStats);
+        stats.score = 0;
+        stats.coin = combinedStats.coin;
+        stats.lastDayPlayed = combinedStats.lastDayPlayed;
+        stats.consecutiveDaysPlayingCount = combinedStats.consecutiveDaysPlayingCount;
+        stats.killedSuperbrainCount = combinedStats.killedSuperbrainCount;
+        stats.killedBySuperbrainCount = combinedStats.killedBySuperbrainCount;
+        Debug.Log("previousStats.consecutiveDaysPlayingCount = " + previousStats.consecutiveDaysPlayingCount);
+        Debug.Log("stats.consecutiveDaysPlayingCount = " + stats.consecutiveDaysPlayingCount);
 
         UpdateScore();
         UpdateLives();
@@ -432,13 +445,12 @@ public class GameController : MonoBehaviour
 			stats.killedSuperbrainCount++;
 		} // else
 		Debug.Log("GameController::GameOver: Running next level.");
-        Stats combinedStats = stats.CombineStats(previousStats);
-        previousStats.score = combinedStats.score + 10;
-        previousStats.coin = combinedStats.coin;
-        previousStats.lastDayPlayed = combinedStats.lastDayPlayed;
-        previousStats.consecutiveDaysPlayingCount = combinedStats.consecutiveDaysPlayingCount;
-        previousStats.killedSuperbrainCount = combinedStats.killedSuperbrainCount;
-        previousStats.killedBySuperbrainCount = combinedStats.killedBySuperbrainCount;
+        previousStats.score = stats.score + previousStats.score;
+        previousStats.coin = stats.coin;
+        previousStats.lastDayPlayed = stats.lastDayPlayed;
+        previousStats.consecutiveDaysPlayingCount = stats.consecutiveDaysPlayingCount;
+        previousStats.killedSuperbrainCount = stats.killedSuperbrainCount;
+        previousStats.killedBySuperbrainCount = stats.killedBySuperbrainCount;
         RunLevel();
 	} // GameOver
 
@@ -492,7 +504,7 @@ public class GameController : MonoBehaviour
             gameSettings.difficulty = GameDifficulty.Easy;
         }
         HideSettings();
-        ShowMessage(Messages.MSG_DIFFICULTY_SET_TO + difficultyText.text);
+        ShowMessage(Messages.MSG_GAME_SETTINGS_UPDATED);
     }
 
     public void ShowMessage(string inMessage)

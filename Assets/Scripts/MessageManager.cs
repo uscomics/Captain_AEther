@@ -9,7 +9,7 @@ public class Messages : MonoBehaviour
     public static string MSG_HOW_TO_MOVE_SHIP = "Use AWSD, cursor keys, or mouse to move.";
     public static string MSG_HOW_TO_FIRE = "Use left mouse button or space bar to attack.";
     public static string MSG_RECEIVED_STORE_CREDIT = "You received in-store credits!";
-    public static string MSG_DIFFICULTY_SET_TO = "Difficulty set to ";
+    public static string MSG_GAME_SETTINGS_UPDATED = "Game settings updated.";
     public static string MSG_BADGE_SCORE_PARTICIPANT = "You got the Participant badge!";
     public static string MSG_BADGE_SCORE_ROOKIE = "You got the Rookie badge!";
     public static string MSG_BADGE_SCORE_COMPETITOR = "You got the Competitor badge!";

@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class StatsDisplay : MonoBehaviour {
+public class StatsDisplay : MonoBehaviour
+{
 
     public Stats stats;
     public Customer customer;
@@ -16,14 +17,15 @@ public class StatsDisplay : MonoBehaviour {
     public RectTransform badgeArea;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		if ((null == stats)
+
+    // Update is called once per frame
+    void Update()
+    {
+        if ((null == stats)
         || (null == customer)
         || (null == score)
         || (null == coin)
@@ -41,12 +43,10 @@ public class StatsDisplay : MonoBehaviour {
         killedBySuperbrain.text = "Killed By Superbrain Count: " + stats.killedBySuperbrainCount;
 
         List<CustomerBadge> badges = customer.badges.badges;
-        Debug.Log("StatsDisplay::Update: Badge Count = " + badges.Count + ".");
         for (int loop = 0; loop < badges.Count; loop++)
         {
             CustomerBadge badge = badges[loop];
-            Image icon = badge.icon;
-            icon.transform.SetParent(badgeArea);   
+            badge.icon.transform.SetParent(badgeArea);
         }
     }
 }
